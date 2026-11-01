@@ -78,6 +78,7 @@
         <a href="#home">Home</a>
         <a href="#products">Products</a>
         <a href="#brick-calculator">Calculator</a>
+        <a href="#brick-advisor">AI Advisor</a>
         <a href="#gallery">Gallery</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
@@ -421,6 +422,40 @@
 
     </div>
 
+  </section>
+
+
+  <!-- FLY ASH BRICK ADVISOR -->
+  <section id="brick-advisor" class="section brick-advisor-section">
+    <div class="container">
+      <div class="brick-advisor-heading">
+        <div>
+          <p class="eyebrow">FLY ASH BRICK ADVISOR</p>
+          <h2>Get answers about fly ash bricks</h2>
+          <p>Ask about choosing bricks, estimating quantities, or planning a bulk order.</p>
+        </div>
+        <span class="advisor-status">AI assistant</span>
+      </div>
+
+      <div class="brick-chat">
+        <div id="brickChatMessages" class="brick-chat-messages" role="log" aria-live="polite" aria-relevant="additions">
+          <p class="brick-chat-message assistant">Hello! I can help with fly ash brick selection, quantity planning, and ordering. What are you building?</p>
+        </div>
+        <div class="brick-chat-prompts" aria-label="Suggested questions">
+          <button type="button" data-prompt="What should I consider when choosing fly ash bricks for a house?">Choosing bricks</button>
+          <button type="button" data-prompt="What information do you need to estimate fly ash brick quantity?">Estimate quantity</button>
+          <button type="button" data-prompt="How can I request a bulk fly ash brick quote in Muradnagar?">Bulk order</button>
+        </div>
+        <form id="brickChatForm" class="brick-chat-form">
+          <label class="visually-hidden" for="brickChatInput">Ask about fly ash bricks</label>
+          <textarea id="brickChatInput" name="message" rows="2" maxlength="1200" placeholder="Ask a question about fly ash bricks..." required></textarea>
+          <button id="brickChatSend" type="submit" aria-label="Send message" title="Send message">
+            <span aria-hidden="true">↑</span>
+          </button>
+        </form>
+        <p id="brickChatStatus" class="brick-chat-status">Answers are limited to fly ash bricks. For current prices and availability, contact JP Ecobuild.</p>
+      </div>
+    </div>
   </section>
 
 
@@ -1397,6 +1432,8 @@
 
     });
   </script>
+
+  <script src="scripts/brick-chat.js" defer></script>
 
 </body>
 
