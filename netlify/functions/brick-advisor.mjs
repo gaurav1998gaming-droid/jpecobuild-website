@@ -58,7 +58,7 @@ export default async (request) => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: process.env.GLM_MODEL || "GLM-4.7-Flash",
+        model: process.env.GLM_MODEL || "GLM-4.5-Flash",
         messages: [{ role: "system", content: systemPrompt }, ...messages],
         max_tokens: 350,
         temperature: 0.3
