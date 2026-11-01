@@ -67,13 +67,23 @@ export default async (request) => {
 
     if (!glmResponse.ok) {
       console.error("GLM request failed with status", glmResponse.status);
-      return jsonResponse(502, { error: "The assistant is temporarily unavailable. Please try again." });
+      const errorByStatus = {
+        400: "GLM rejected the request. Check that GLM_MODEL names a model available to your account.",
+        401: "GLM rejected the API key. Confirm it is active and is a Standard API key.",
+        403: "GLM denied API access. Check that your account and API permissions allow this model.",
+        404: "GLM could not find the API endpoint or model. Verify the model name; GLM Coding Plan keys require their dedicated endpoint.",
+        429: "The GLM API quota or rate limit was reached. Check your Z.AI account usage and limits."
+      };
+      const error = errorByStatus[glmResponse.status]
+        || `GLM returned HTTP ${glmResponse.status}. Check the Netlify Function logs and Z.AI service status.`;
+      return jsonResponse(502, { error });
     }
 
     const data = await glmResponse.json();
     const reply = data.choices?.[0]?.message?.content?.trim();
     if (!reply) {
-      return jsonResponse(502, { error: "The assistant returned an empty answer. Please try again." });
+      console.error("GLM returned a successful response without a chat message");
+      return jsonResponse(502, { error: "GLM returned an unexpected response. Check the selected model and the Netlify Function logs." });
     }
 
     return jsonResponse(200, { reply });
